@@ -184,3 +184,96 @@ void inserir(t_celula *novo){
 		cel->valor = novo->valor;
 	}
 }
+
+// Função que deleta um elemento pela posição (linha e coluna)
+void deletar(int lin, int col){
+	// verifica se existe a célula (elemento)
+	if(existe_celula(lin, col)){
+		// remove do começo
+		if(primeiro->lin == lin && primeiro->col == col){
+			// pego o apontador para o próximo
+			t_celula *prox = primeiro->prox;
+
+			free(primeiro); // libera memória
+
+			// verifico se o próximo existe
+			if(prox)
+				prox->ant = NULL; // atualizo o anterior
+
+			// faz o "primeiro" ser o "prox"
+			primeiro = prox;
+
+			return; // sai da função
+		}
+
+		/*
+			Se chegou aqui é porque NÃO irá remover do início e
+			existe mais de 1 elemento
+		*/
+		t_celula *p = primeiro->prox;
+
+		// percorre a lista
+		while(p){
+			if(p->lin == lin && p->col == col)	{
+				if(p->prox){ // testa se NÃO é o último elemento
+					/*
+						Faço o próximo do anterior de "p" apontar
+						para o próximo de "p"
+					*/
+					p->ant->prox = p->prox;
+
+					/*
+						Faço o anterior do proximo de "p" apontar
+						para o anterior de "p"
+					*/
+					p->prox->ant = p->ant;
+				}
+				else{
+					// se chegou aqui, é porque é o último elemento
+					
+					// faz o proximo do anterior de "p" apontar para NULL
+					p->ant->prox = NULL;
+					
+					// faz o anterior de "p" ser o "ultimo"
+					ultimo = p->ant;
+				}
+				free(p); // libera o "p"
+				return; // sai da função
+			}
+			p = p->prox;
+		}
+	}
+}
+
+
+// Função que verifica se a lista está vazia
+int vazia(){
+	if(!ultimo) // se o último for NULL, então a lista está vazia
+		return 1;
+	return 0;
+}
+
+
+// Função que verifica se um elemento existe pela posição (linha e coluna)
+t_celula* existe_celula(int lin, int col){
+	t_celula* p = primeiro;
+
+	while(p){ // percorre a lista
+		// verifica a linha e a coluna
+		if(lin == p->lin && col == p->col)
+			return p; // retorna a célula
+		p = p->prox;
+	}
+	return NULL;
+}
+
+
+// Função que imprime os lementos da lista
+void imprimir_elementos(){
+	t_celula* p = primeiro;
+
+	while(p){ // percorre a lista
+		printf("(%d,%d)\n", p->lin, p->col);
+		p = p->prox;
+	}
+}
