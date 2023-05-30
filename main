@@ -314,3 +314,48 @@ void imprimir_matriz(){
 	else
 		printf("\nLista vazia!!\n");
 }
+
+int main(int argc, char * argv[]){
+	t_celula *vet[MAX]; // vetor de células
+
+	// passa a linha e coluna da célula
+	vet[0] = criar_celula(2, 1, 10);
+	vet[1] = criar_celula(1, 2, 20);
+	vet[2] = criar_celula(10, 3, 30);
+	vet[3] = criar_celula(1, 1, 40);
+	vet[4] = criar_celula(3, 2, 50);
+	vet[5] = criar_celula(2, 8, 60);
+	vet[6] = criar_celula(3, 1, 70);
+	vet[7] = criar_celula(4, 2, 80);
+	vet[8] = criar_celula(3, 3, 90);
+	vet[9] = criar_celula(1, 6, 100);
+	
+
+	if(vazia()) // verifica se a lista está vazia
+		printf("\nLista vazia!!\n");
+	else
+		printf("\nLista NAO vazia!!\n");
+
+	// insere os elementos (células)
+	for(int i = 0; i < MAX; i++)
+		inserir(vet[i]);
+
+	if(vazia()) // verifica se a lista está vazia
+		printf("\nLista vazia!!\n");
+	else
+		printf("\nLista NAO vazia!!\n");
+
+	printf("\nImprimindo os elementos da lista:\n");
+	imprimir_elementos(); // imprime a matriz
+
+	printf("\nImprimindo a matriz esparsa (X eh o elemento que se repete):\n");
+	imprimir_matriz(); // imprime a matriz
+
+	deletar(10, 3); // deletando a célula da posição (10,3)
+	deletar(1,1);
+
+	printf("\nImprimindo a matriz esparsa (X eh o elemento que se repete):\n");
+	imprimir_matriz(); // imprime a matriz
+
+	return 0;
+}
