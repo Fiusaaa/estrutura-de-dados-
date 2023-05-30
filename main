@@ -276,4 +276,41 @@ void imprimir_elementos(){
 		printf("(%d,%d)\n", p->lin, p->col);
 		p = p->prox;
 	}
+}	
+
+// Função para imprimir a matriz convencional
+// "X" indica o elemento repetido da matriz esparsa (pode ser um 0 por exemplo)
+void imprimir_matriz(){
+	if(!vazia()) // verifica se a lista NÃO está vazia
+	{
+		/*
+			Obtendo a maior linha, basta saber a do último
+			porque está ordenado pela linha
+		*/
+		int total_linhas = ultimo->lin;
+
+		// obtendo o total de colunas
+		int total_colunas = -1;
+		t_celula* p = primeiro;
+		while(p){ // percorre a lista para obter o total de colunas
+			if(p->col > total_colunas)
+				total_colunas = p->col;
+			p = p->prox;
+		}
+
+		for(int i = 0; i < total_linhas; i++){
+			for(int j = 0; j < total_colunas; j++){
+				// busca por um elemento passando a linha e coluna
+				t_celula* cel = existe_celula(i + 1, j + 1);
+
+				if(cel) // testa se encontrou o elemento
+					printf("%d\t", cel->valor);
+				else // se não existe o elemento, então imprime 'X'
+					printf("X\t");
+			}
+			printf("\n");
+		}
+	}
+	else
+		printf("\nLista vazia!!\n");
 }
