@@ -1,0 +1,186 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 10 // máximo do vetor de células (ver na função main)
+
+
+/*
+	Estrutura célula contendo os seguintes campos:
+		- valor
+		- linha e coluna (posição da célula)
+		- ponteiro para o próximo elemento
+		- ponteiro para o elemento anterior
+*/
+typedef struct celula
+{
+	int valor;
+	int lin, col;
+	struct celula *prox;
+	struct celula *ant;
+} t_celula;
+
+
+// variáveis globais
+t_celula *primeiro; // primeiro elemento da lista
+t_celula *ultimo; // último elemento da lista
+
+
+// protótipos de funções
+t_celula* criar_celula(int lin, int col, int valor);
+void inserir(t_celula *novo);
+void deletar(int lin, int col);
+int vazia();
+t_celula* existe_celula(int lin, int col);
+void imprimir_elementos();
+void imprimir_matriz();
+
+
+/* Função que cria uma nova celula passando a linha e coluna */
+t_celula* criar_celula(int lin, int col, int valor){
+	t_celula * novo;
+
+	// aloca espaço em memória
+	novo = (t_celula*)malloc(sizeof(t_celula));
+
+	// testa se houve falha na alocação
+	if(!novo){
+		printf("Erro ao alocar memoria!!\n");
+		exit(1);
+	}
+
+	// atribuição de variáveis
+	novo->valor = valor;
+	novo->lin = lin;
+	novo->col = col;
+
+	return novo;
+}
+
+
+/*
+	Função que insere um novo elemento (célula) na matriz esparsa
+	A lista é ordenada de acordo com o nome da célula
+*/
+void inserir(t_celula *novo){
+	/*
+		obtém uma célula passando a linha e coluna do novo elemento
+		para verificar se a posição já está ocupada
+	*/
+	t_celula* cel = existe_celula(novo->lin, novo->col);
+
+	if(!cel){ // verifica se não existe
+		if(!ultimo){
+			/*
+				Se o "ultimo" é NULL, então a lista está vazia, o "novo"
+				será o primeiro elemento a ser inserido
+			*/
+
+			// o próximo e o anterior apontam para NULL
+			novo->prox = NULL;
+			novo->ant = NULL;
+
+			// faz o "ultimo" e "primeiro" apontarem para "novo"
+			ultimo = novo;
+			primeiro = novo;
+		}
+		else
+		{
+			// "p" serve para percorrer a lista
+			// "ant" aponta para o anterior de "p"
+			t_celula *p, *ant;
+
+
+			p = primeiro; // começa do topo da lista
+			ant = p->ant; // "ant" é o anterior ao "p", ou seja, NULL
+
+			// poderia fazer também: ant = NULL;
+
+			// percorre a lista
+			while(p) // enquanto "p" diferente de NULL
+			{
+				/*
+					Se a célula corrente "p" precede a
+					célula "novo", então continua percorrendo
+				*/
+				if((p->lin < novo->lin) || ((p->lin == novo->lin) && (p->lin + p->col) < (novo->lin + novo->col)))
+				{
+					ant = p; // guarda o anterior
+					p = p->prox; // aponta para o próximo
+				}
+				else
+				{
+					/*
+						Se cair aqui é porque encontramos
+						onde inserir a nova célula
+					*/
+
+					/*
+						Se p->ant é diferente de NULL, então trata-se
+						de um elemento intermediário
+					*/
+					if(p->ant)
+					{
+						/*
+							p->ant é a célula que contém um nome imediatamente
+							anterior à nova célula que será inserida.
+							Então dizemos que o próximo de p->ant irá apontar
+							para essa nova célula
+						*/
+						p->ant->prox = novo;
+
+						/*
+							Se p->ant é a célula imediatamente anterior à
+							célula "novo", então "p" é a célula imediatamente
+							posterior à célula "novo", por isso dizendos que o
+							próximo de "novo" aponta para "p'.
+						*/
+						novo->prox = p;
+
+						// novo->ant tem que apontar para o p->ant
+						novo->ant = p->ant;
+
+						// faz p->ant apontar para o novo
+						p->ant = novo; // correção de: novo->avetnt = i;
+
+						return; // sai da função
+					}
+
+					/*
+						Se chegar aqui é porque p->ant é NULL, então
+						iremos inserir o novo elemento no início, ou seja,
+						o "novo" será o novo primeiro da lista
+					*/
+
+					novo->prox = p; // o próximo do novo aponta para "p"
+					novo->ant = NULL; // o anterior aponta para NULL (primeiro da lista)
+					p->ant = novo; // faz o anterior de "p" apontar para o novo
+					primeiro = novo; // "primeiro" aponta para "novo"
+
+					return; // sai da função
+				}
+			}
+
+			/*
+				Se chegou aqui, então insere no final, agora preciso
+				da variável "ant".
+			*/
+
+			// faz o próx. do antigo último apontar para "novo"
+			ant->prox = novo;
+
+			// como o "novo" agora é o último, então o próximo dele
+			// aponta para NULL
+			novo->prox = NULL;
+
+			// o anterior ao "novo" aponta para o "ant"
+			novo->ant = ant;
+
+			// atualiza o último elemento da lista
+			ultimo = novo;
+		}
+	}
+	else
+	{
+		// se já existe então sobrescreve o valor
+		cel->valor = novo->valor;
+	}
+}
