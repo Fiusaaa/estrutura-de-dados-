@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX 10 // máximo do vetor de células (ver na função main)
+int* ini;
 
 
 /*
@@ -314,6 +315,31 @@ void imprimir_matriz(){
 	else
 		printf("\nLista vazia!!\n");
 }
+// alocando a memoria do array ini
+void alocaM() {
+     ini =(int*) malloc(sizeof(int) * 10);
+   
+}
+
+// puxando os valores iniciais do arquivo ini.txt
+void iniciar() {
+   FILE* f; 
+   f = fopen("ini.txt", "r");
+
+   if(f == 0) {
+    printf("Erro na leitura\n");
+    exit(1);
+   }
+
+   alocaM();
+
+   for (int i = 0 ; i <= 9; i++) {
+
+    fscanf(f, "%d", &ini[i]);
+}
+
+    fclose(f);
+}
 
 
 int main(int argc, char * argv[]){
@@ -336,25 +362,26 @@ int main(int argc, char * argv[]){
             if (gc == EOF) exit(EXIT_FAILURE);
         } while (gc != '\n');
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  
+  */
     
-    
+        iniciar();
+	
 	t_celula *vet[MAX]; // vetor de células
 
 	// passa a linha e coluna da célula
-	vet[0] = criar_celula(2, 1, 1);
-	vet[1] = criar_celula(1, 2, 1);
-	vet[2] = criar_celula(6, 3, 1);
-	vet[3] = criar_celula(1, 1, 1);
-	vet[4] = criar_celula(3, 2, 1);
-	vet[5] = criar_celula(2, 6, 1);
-	vet[6] = criar_celula(3, 1, 1);
-	vet[7] = criar_celula(4, 2, 1);
-	vet[8] = criar_celula(3, 3, 1);
-	vet[9] = criar_celula(1, 6, 1);
+	vet[0] = criar_celula(2, 1, ini[0]);
+	vet[1] = criar_celula(1, 2, ini[1]);
+	vet[2] = criar_celula(6, 3, ini[2]);
+	vet[3] = criar_celula(1, 1, ini[3]);
+	vet[4] = criar_celula(3, 2, ini[4]);
+	vet[5] = criar_celula(2, 6, ini[5]);
+	vet[6] = criar_celula(3, 1, ini[6]);
+	vet[7] = criar_celula(4, 2, ini[7]);
+	vet[8] = criar_celula(3, 3, ini[8]);
+	vet[9] = criar_celula(1, 6, ini[9]);
 	for(int i = 0; i < MAX; i++)
 		inserir(vet[i]);
-	imprimir_matriz();*/
+	imprimir_matriz();
 	
 	do {
 	    int scan = 0;
@@ -491,6 +518,8 @@ int main(int argc, char * argv[]){
         
         }   
 	} while (opcao != 5);
+	//limpando a memoria do array
+	free(ini);
 
 	return 0;
 }
