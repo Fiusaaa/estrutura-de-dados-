@@ -295,7 +295,7 @@ void imprimir_matriz(){
 
 				if(cel) // testa se encontrou o elemento
 					printf("%d\t", cel->valor);
-				else // se não existe o elemento, então imprime '0'
+				else // se nao existe o elemento, entao imprime '0'
 					printf("0\t");
 			}
 			printf("\n");
@@ -409,7 +409,7 @@ int main(int argc, char * argv[]){
                     } while (gc != '\n');
                     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                     if(lin < 1 || lin > 6) {
-                        printf("Valor inválido. Favor inserir um numero de 1 e 6: ");
+                        printf("Valor invalido. Favor inserir um numero de 1 e 6: ");
                     }
                 } while(lin < 1 || lin > 6);
                 printf("\nInsira o numero referente a coluna na qual deseja estacionar: ");
@@ -425,7 +425,7 @@ int main(int argc, char * argv[]){
                     } while (gc != '\n');
                     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
                     if(col < 1 || col > 6) {
-                        printf("Valor inválido. Favor inserir um numero de 1 e 6: ");
+                        printf("Valor invalido. Favor inserir um numero de 1 e 6: ");
                     }
                 } while(col < 1 || col > 6);
                 vet[9] = criar_celula(lin, col, 1);
@@ -449,7 +449,7 @@ int main(int argc, char * argv[]){
                     } while (gc != '\n');
                     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                     if(lin < 1 || lin > 6) {
-                        printf("Valor inválido. Favor inserir um numero de 1 e 6: ");
+                        printf("Valor invalido. Favor inserir um numero de 1 e 6: ");
                     }
                 } while(lin < 1 || lin > 6);
                 printf("\nInsira o numero referente a coluna na qual deseja sair: ");
@@ -465,7 +465,7 @@ int main(int argc, char * argv[]){
                     } while (gc != '\n');
                     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
                     if(col < 1 || col > 6) {
-                        printf("Valor inválido. Favor inserir um numero de 1 e 6: ");
+                        printf("Valor invalido. Favor inserir um numero de 1 e 6: ");
                     }
                 } while(col < 1 || col > 6);
                 deletar(lin, col);
@@ -476,7 +476,7 @@ int main(int argc, char * argv[]){
             //-----------------------------------------------------
             
             case 4://Exibir vagas ocupadas
-                printf("\nAs seguintes vagas estão ocupadas:\n");
+                printf("\nAs seguintes vagas estao ocupadas:\n");
 	            imprimir_elementos(); // imprime a matriz
 	        break;     
             
@@ -487,7 +487,7 @@ int main(int argc, char * argv[]){
             break;
              
             //-----------------------------------------------------       
-            case 6://Opção inválida
+            case 6://Opção invalida
                 printf("\n\nOpcao invalida. Tente novamente.\n");
             break;
             //-----------------------------------------------------
