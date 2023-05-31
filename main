@@ -429,6 +429,7 @@ int main(int argc, char * argv[]){
                     }
                 } while(col < 1 || col > 6);
                 vet[9] = criar_celula(lin, col, 1);
+		inserir(vet[9]);
                 
                 
                 break;
