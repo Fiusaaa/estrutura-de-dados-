@@ -356,7 +356,6 @@ int main(int argc, char * argv[]){
 	vet[6] = criar_celula(3, 1, ini[6]);
 	vet[7] = criar_celula(4, 2, ini[7]);
 	vet[8] = criar_celula(3, 3, ini[8]);
-	vet[9] = criar_celula(1, 6, ini[9]);
 	for(int i = 0; i < MAX; i++)
 		inserir(vet[i]);
 	imprimir_matriz();
@@ -428,7 +427,7 @@ int main(int argc, char * argv[]){
                         printf("Valor inválido. Favor inserir um numero de 1 e 6: ");
                     }
                 } while(col < 1 || col > 6);
-                criar_celula(lin, col, 1);
+                vet[9] = criar_celula(lin, col, 1);
                 
                 
                 break;
