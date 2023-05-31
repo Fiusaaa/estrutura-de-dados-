@@ -305,8 +305,8 @@ void imprimir_matriz(){
 
 				if(cel) // testa se encontrou o elemento
 					printf("%d\t", cel->valor);
-				else // se não existe o elemento, então imprime 'X'
-					printf("X\t");
+				else // se não existe o elemento, então imprime '0'
+					printf("0\t");
 			}
 			printf("\n");
 		}
@@ -315,47 +315,182 @@ void imprimir_matriz(){
 		printf("\nLista vazia!!\n");
 }
 
+
 int main(int argc, char * argv[]){
+    int opcao = 0;
+    int lin;
+    int col;
+    
+   /* printf ("\nDESEJA QUE OS DADOS DE TESTE SEJAM CARREGADOS?\n")
+    printf("1. Sim\n");
+    printf("2. Não\n");
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ função para impedir que usuario digite letra e trave o programa
+        scan = scanf ("%d",&opcao);
+        if (scan < 1 || scan > 2){
+            opcao = 6;
+            scan = 6;
+        }
+        int gc;
+        do {
+            gc = getchar();
+            if (gc == EOF) exit(EXIT_FAILURE);
+        } while (gc != '\n');
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  
+    
+    
 	t_celula *vet[MAX]; // vetor de células
 
 	// passa a linha e coluna da célula
-	vet[0] = criar_celula(2, 1, 10);
-	vet[1] = criar_celula(1, 2, 20);
-	vet[2] = criar_celula(10, 3, 30);
-	vet[3] = criar_celula(1, 1, 40);
-	vet[4] = criar_celula(3, 2, 50);
-	vet[5] = criar_celula(2, 8, 60);
-	vet[6] = criar_celula(3, 1, 70);
-	vet[7] = criar_celula(4, 2, 80);
-	vet[8] = criar_celula(3, 3, 90);
-	vet[9] = criar_celula(1, 6, 100);
-	
-
-	if(vazia()) // verifica se a lista está vazia
-		printf("\nLista vazia!!\n");
-	else
-		printf("\nLista NAO vazia!!\n");
-
-	// insere os elementos (células)
+	vet[0] = criar_celula(2, 1, 1);
+	vet[1] = criar_celula(1, 2, 1);
+	vet[2] = criar_celula(6, 3, 1);
+	vet[3] = criar_celula(1, 1, 1);
+	vet[4] = criar_celula(3, 2, 1);
+	vet[5] = criar_celula(2, 6, 1);
+	vet[6] = criar_celula(3, 1, 1);
+	vet[7] = criar_celula(4, 2, 1);
+	vet[8] = criar_celula(3, 3, 1);
+	vet[9] = criar_celula(1, 6, 1);
 	for(int i = 0; i < MAX; i++)
 		inserir(vet[i]);
-
-	if(vazia()) // verifica se a lista está vazia
-		printf("\nLista vazia!!\n");
-	else
-		printf("\nLista NAO vazia!!\n");
-
-	printf("\nImprimindo os elementos da lista:\n");
-	imprimir_elementos(); // imprime a matriz
-
-	printf("\nImprimindo a matriz esparsa (X eh o elemento que se repete):\n");
-	imprimir_matriz(); // imprime a matriz
-
-	deletar(10, 3); // deletando a célula da posição (10,3)
-	deletar(1,1);
-
-	printf("\nImprimindo a matriz esparsa (X eh o elemento que se repete):\n");
-	imprimir_matriz(); // imprime a matriz
+	imprimir_matriz();*/
+	
+	do {
+	    int scan = 0;
+	    printf("\n==== MENU ====\n");
+        printf("1. Mostrar estacionamento\n");
+        printf("2. Estacionar na vaga\n");
+        printf("3. Liberar/sair da vaga\n");
+        printf("4. Exibir vagas ocupadas\n");
+        printf("5. Encerrar o programa\n");
+        printf("==============\n");
+        printf("\nDigite a opcao desejada: ");
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ função para impedir que usuario digite letra e trave o programa
+        scan = scanf ("%d",&opcao);
+        if (scan < 1 || scan > 5){
+            opcao = 6;
+            scan = 6;
+        }
+        int gc;
+        do {
+            gc = getchar();
+            if (gc == EOF) exit(EXIT_FAILURE);
+        } while (gc != '\n');
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        switch (opcao) {
+            
+            case 1://Mostrar estacionamento
+            
+                if(vazia()) // verifica se a lista está vazia
+                    printf("\nO estacionamento está vazio!\n");
+                else
+                    printf("\n\n");
+                    imprimir_matriz();
+                break;  
+            //-----------------------------------------------------
+            
+            case 2://Estacionar na vaga
+                printf("\nInsira o numero referente a linha na qual deseja estacionar: ");
+                do{
+                    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ função para impedir que usuario digite letra e trave o programa
+                    scan = scanf ("%d",&lin);
+                    if (scan < 1 || scan > 6)
+                        lin = 7;
+                    int gc;
+                    do {
+                     gc = getchar();
+                        if (gc == EOF) exit(EXIT_FAILURE);
+                    } while (gc != '\n');
+                    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    if(lin < 1 || lin > 6) {
+                        printf("Valor inválido. Favor inserir um numero de 1 e 6: ");
+                    }
+                } while(lin < 1 || lin > 6);
+                printf("\nInsira o numero referente a coluna na qual deseja estacionar: ");
+                do{
+                    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ função para impedir que usuario digite letra e trave o programa
+                    scan = scanf ("%d",&col);
+                    if (scan < 1 || scan > 6)
+                        col = 7;
+                    int gc;
+                    do {
+                     gc = getchar();
+                        if (gc == EOF) exit(EXIT_FAILURE);
+                    } while (gc != '\n');
+                    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+                    if(col < 1 || col > 6) {
+                        printf("Valor inválido. Favor inserir um numero de 1 e 6: ");
+                    }
+                } while(col < 1 || col > 6);
+                criar_celula(lin, col, 1);
+                
+                
+                break;
+            //-----------------------------------------------------
+            
+            case 3://Liberar/sair da vaga
+                printf("\nInsira o numero referente a linha na qual deseja sair: ");
+                do{
+                    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ função para impedir que usuario digite letra e trave o programa
+                    scan = scanf ("%d",&lin);
+                    if (scan < 1 || scan > 5)
+                        lin = 7;
+                    int gc;
+                    do {
+                     gc = getchar();
+                        if (gc == EOF) exit(EXIT_FAILURE);
+                    } while (gc != '\n');
+                    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    if(lin < 1 || lin > 6) {
+                        printf("Valor inválido. Favor inserir um numero de 1 e 6: ");
+                    }
+                } while(lin < 1 || lin > 6);
+                printf("\nInsira o numero referente a coluna na qual deseja sair: ");
+                do{
+                    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ função para impedir que usuario digite letra e trave o programa
+                    scan = scanf ("%d",&col);
+                    if (scan < 1 || scan > 5)
+                        col = 7;
+                    int gc;
+                    do {
+                     gc = getchar();
+                        if (gc == EOF) exit(EXIT_FAILURE);
+                    } while (gc != '\n');
+                    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+                    if(col < 1 || col > 6) {
+                        printf("Valor inválido. Favor inserir um numero de 1 e 6: ");
+                    }
+                } while(col < 1 || col > 6);
+                deletar(lin, col);
+                printf("\nVaga na linha %d , coluna %d, se encontra livre", lin, col);
+                
+                
+                break;
+            //-----------------------------------------------------
+            
+            case 4://Exibir vagas ocupadas
+                printf("\nAs seguintes vagas estão ocupadas:\n");
+	            imprimir_elementos(); // imprime a matriz
+	        break;     
+            
+            //-----------------------------------------------------
+            
+            case 5://Encerrar o programa
+                    printf("Encerrando o programa...\n");
+            break;
+             
+            //-----------------------------------------------------       
+            case 6://Opção inválida
+                printf("\n\nOpcao invalida. Tente novamente.\n");
+            break;
+            //-----------------------------------------------------
+            default:
+                printf("\n\nOpcao invalida. Tente novamente.\n");
+                break;
+        
+        }   
+	} while (opcao != 5);
 
 	return 0;
 }
