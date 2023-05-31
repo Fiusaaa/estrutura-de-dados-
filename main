@@ -356,6 +356,7 @@ int main(int argc, char * argv[]){
 	vet[6] = criar_celula(3, 1, ini[6]);
 	vet[7] = criar_celula(4, 2, ini[7]);
 	vet[8] = criar_celula(3, 3, ini[8]);
+	vet[9] = criar_celula(6, 6, ini[8]);
 	for(int i = 0; i < MAX; i++)
 		inserir(vet[i]);
 	imprimir_matriz();
