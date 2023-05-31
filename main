@@ -280,25 +280,14 @@ void imprimir_elementos(){
 }	
 
 // Função para imprimir a matriz convencional
-// "X" indica o elemento repetido da matriz esparsa (pode ser um 0 por exemplo)
+// "0" indica o elemento repetido da matriz esparsa 
 void imprimir_matriz(){
 	if(!vazia()) // verifica se a lista NÃO está vazia
 	{
-		/*
-			Obtendo a maior linha, basta saber a do último
-			porque está ordenado pela linha
-		*/
-		int total_linhas = ultimo->lin;
-
-		// obtendo o total de colunas
-		int total_colunas = -1;
+		
+		int total_linhas = 6; // corresponde ao estacionamento físico
+		int total_colunas = 6; // corresponde ao estacionamento físico
 		t_celula* p = primeiro;
-		while(p){ // percorre a lista para obter o total de colunas
-			if(p->col > total_colunas)
-				total_colunas = p->col;
-			p = p->prox;
-		}
-
 		for(int i = 0; i < total_linhas; i++){
 			for(int j = 0; j < total_colunas; j++){
 				// busca por um elemento passando a linha e coluna
@@ -313,7 +302,7 @@ void imprimir_matriz(){
 		}
 	}
 	else
-		printf("\nLista vazia!!\n");
+		printf("\n\n");
 }
 // alocando a memoria do array ini
 void alocaM() {
@@ -343,26 +332,15 @@ void iniciar() {
 
 
 int main(int argc, char * argv[]){
-    int opcao = 0;
-    int lin;
-    int col;
+   	int opcao = 0;
+    	int lin;
+    	int col;
     
-   /* printf ("\nDESEJA QUE OS DADOS DE TESTE SEJAM CARREGADOS?\n")
-    printf("1. Sim\n");
-    printf("2. Não\n");
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ função para impedir que usuario digite letra e trave o programa
-        scan = scanf ("%d",&opcao);
-        if (scan < 1 || scan > 2){
-            opcao = 6;
-            scan = 6;
-        }
-        int gc;
-        do {
-            gc = getchar();
-            if (gc == EOF) exit(EXIT_FAILURE);
-        } while (gc != '\n');
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  */
+    	printf ("\n-----------------------------------------------?\n");
+    	printf("BEM VINDO AO SISTEMA DE MONITORAMENTO DE ESTACIONAMENTO\n");
+    	printf("O ESTACIONAMENTO CONTA COM 36 VAGAS \n");
+	printf ("\n-----------------------------------------------?\n\n");
+    
     
         iniciar();
 	
@@ -490,7 +468,7 @@ int main(int argc, char * argv[]){
                     }
                 } while(col < 1 || col > 6);
                 deletar(lin, col);
-                printf("\nVaga na linha %d , coluna %d, se encontra livre", lin, col);
+                printf("\nVaga na linha %d , coluna %d, se encontra livre\n\n", lin, col);
                 
                 
                 break;
